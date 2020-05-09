@@ -1,12 +1,25 @@
-import time
-import keras
-import pandas as pd
-import numpy as np
+import DataPrepare as DP
+import NN
 import matplotlib.pyplot as plt
-from sklearn.preprocessing import MinMaxScaler
 
-from keras.models import Sequential
-from keras.layers import LSTM
-from keras.layers import Dense, Activation, Dropout
+data = DP.LoadData('data.csv')
 
-load_data('data.csv', 50)
+size = 30
+
+confirmed = DP.GetConfirmed(data, size)
+confirmedRate = DP.GetRate(confirmed, size)
+'''
+for i in range(len(confirmedRate)):
+    plt.plot(confirmedRate[i])
+    plt.show()
+plt.plot(confirmed)
+plt.show()
+print(confirmedRate)
+'''
+confirmedNN = NN.NN(confirmedRate)
+confirmedNN.train()
+validation = confirmedRate[30]
+x = confirmedNN.predict([validation])
+validation.append(x)
+plt.plot(validation)
+plt.show()
