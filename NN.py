@@ -32,15 +32,20 @@ class NN:
         self.model.add(LSTM(input_shape = (len(data), len(data[0]) - 1), units = Units, return_sequences = False))
         self.model.add(Dropout(0.2))
 
-        self.model.add(Dense(units = Units, activation = 'relu'))
-        self.model.compile(loss = 'sparse_categorical_crossentropy', optimizer = 'adam')
+        self.model.add(Dense(units = 1, activation = 'linear'))
+        #self.model.add(Dense(units = 1, activation = 'relu'))
+        self.model.compile(loss = 'mse', optimizer = 'adam')
         self.model.summary()
     
     def train(self):
         my_callbacks = [
-            tf.keras.callbacks.ModelCheckpoint(filepath='model.{epoch:02d}-{val_loss:.2f}.h5'),
+            keras.callbacks.ModelCheckpoint(filepath='model.{epoch:02d}-{val_loss:.2f}.h5'
+                , save_weights_only = True, period = 100),
         ]
-        self.model.fit(self.Xtrain, self.Ytrain, batch_size = 1, epochs = 100, validation_split = 0.2, callbacks = my_callbacks)
+        self.model.fit(self.Xtrain, self.Ytrain, batch_size = 1, epochs = 10000, validation_split = 0.2, callbacks = my_callbacks)
     
+    def load(self, filename):
+        self.model.load_weights(filename)
+
     def predict(self, data):
         return self.model.predict(data)

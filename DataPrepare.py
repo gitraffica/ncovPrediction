@@ -54,7 +54,7 @@ def Patch(data, size):
     data = [0] * (size - len(data)) + data
     return data
 
-#This will return a (size-2) shape vector, where each element is (df\dx) \ (d^2 f \ dx^2)
+#This will return a (size-2) shape vector, where each element is (d^2 f \ dx^2) \ (df\dx)
 def GetRate(data, size):
     ret = []
     res = []
