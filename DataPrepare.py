@@ -5,14 +5,14 @@ import matplotlib.pyplot as plt
 
 class AllData:
 
-    def Data(self):
+    def AllData(self):
         self.ConfirmedData =    []
         self.DeathData =        []
         self.RecoverData =      []
         self.AreaName =         []
 
 class Data:
-
+    
     def Data(self):
         self.ConfirmedData =    0
         self.DeathData =        0
@@ -22,6 +22,19 @@ class Data:
 def LoadData(filename):
     df = pd.read_csv(filename, header=None)
     data = df.values
+    st,ed = 1,1
+
+#去掉地区，将治愈的 nan 改成 0
+    while ed < data.shape[0] :
+        if pd.isna(data[ed][13]):
+            data[st] = data[ed]
+            st = st + 1
+        ed = ed + 1
+    data = data[0:st]
+    for line in range(data.shape[0]):
+        if pd.isna(data[line][6]):
+            data[line][6] = 0
+
     res = AllData()
     res.ConfirmedData   = data[:, 2][1:]
     res.ConfirmedData   = res.ConfirmedData.astype('float32')
@@ -30,6 +43,18 @@ def LoadData(filename):
     res.RecoverData     = data[:, 6][1:]
     res.RecoverData     = res.RecoverData.astype('float32')
     res.AreaName        = data[:,12][1:]
+    
+    #print(res.RecoverData)
+
+    #for i in range(len(res.ConfirmedData)):
+        #res.ConfirmedData[i] -= res.RecoverData[i] + res.DeathData[i]
+    #print(res.ConfirmedData)
+
+    #改百分比
+    #for line in range(res.ConfirmedData.shape[0]):
+        #res.RecoverData[line] = res.RecoverData[line]/res.ConfirmedData[line] * 100
+        #res.DeathData[line]   = res.DeathData[line]/res.ConfirmedData[line] * 100
+
     arr = []
     dic = {}
     now = []
@@ -62,6 +87,8 @@ def GetRate(data, size):
         for j in range(1, size - 2):
             deri1 = (data[i][j+1] - data[i][j-1]) / 2
             deri2 = (data[i][j+1] - data[i][j]) - (data[i][j] - data[i][j-1])
+            #deri1 = data[i][j]
+            #deri2 = (data[i][j+1] - data[i][j-1]) / 2
             if deri1 == 0:
                 res.append(0)
             else:
@@ -75,7 +102,16 @@ def GetConfirmed(data, size):
     for i in range(len(data[0])):
         res.append(data[0][i].ConfirmedData)
     ret = []
-    for i in range(len(data[0]) - size):
+    for i in range(len(data[0])):
+        ret.append(Patch(res[max(0, i-size):i], size))
+    return ret
+
+def GetDeath(data, size):
+    res = []
+    for i in range(len(data[0])):
+        res.append(data[0][i].DeathData)
+    ret = []
+    for i in range(len(data[0])):
         ret.append(Patch(res[max(0, i-size):i], size))
     return ret
 

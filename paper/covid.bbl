@@ -1,0 +1,31 @@
+\begin{thebibliography}{1}
+
+\bibitem{HochSchm97}
+Sepp Hochreiter and J¨¹rgen Schmidhuber.
+\newblock Long short-term memory.
+\newblock {\em Neural Computation}, 9(8):1735--1780, 1997.
+
+\bibitem{kermack1927a}
+William~Ogilvy {Kermack} and A.~G. {McKendrick}.
+\newblock A contribution to the mathematical theory of epidemics.
+\newblock {\em Proceedings of The Royal Society A: Mathematical, Physical and
+  Engineering Sciences}, 115(772):700--721, 1927.
+
+\bibitem{Liu2017Predicting}
+Sijun Liu, Jiaping Chen, Jianming Wang, Zhuchao Wu, Weihua Wu, Zhiwei Xu,
+  Wenbiao Hu, Fei Xu, Shilu Tong, and Hongbing Shen.
+\newblock Predicting the outbreak of hand, foot, and mouth disease in nanjing,
+  china: a time-series model based on weather variability.
+\newblock {\em International Journal of Biometeorology}, 2017.
+
+\bibitem{JTD36385}
+Zifeng Yang, Zhiqi Zeng, Ke~Wang, Sook-San Wong, Wenhua Liang, Mark Zanin, Peng
+  Liu, Xudong Cao, Zhongqiang Gao, Zhitong Mai, Jingyi Liang, Xiaoqing Liu,
+  Shiyue Li, Yimin Li, Feng Ye, Weijie Guan, Yifan Yang, Fei Li, Shengmei Luo,
+  Yuqi Xie, Bin Liu, Zhoulang Wang, Shaobo Zhang, Yaonan Wang, Nanshan Zhong,
+  and Jianxing He.
+\newblock Modified seir and ai prediction of the epidemics trend of covid-19 in
+  china under public health interventions.
+\newblock {\em Journal of Thoracic Disease}, 12(3), 2020.
+
+\end{thebibliography}

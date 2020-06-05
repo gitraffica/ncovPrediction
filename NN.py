@@ -39,10 +39,10 @@ class NN:
     
     def train(self):
         my_callbacks = [
-            keras.callbacks.ModelCheckpoint(filepath='model.{epoch:02d}-{val_loss:.2f}.h5'
-                , save_weights_only = True, period = 100),
+            keras.callbacks.ModelCheckpoint(filepath='Deathmodel.{epoch:02d}-{loss:.2f}.h5'
+                , save_weights_only = True, period = 20),
         ]
-        self.model.fit(self.Xtrain, self.Ytrain, batch_size = 1, epochs = 10000, validation_split = 0.2, callbacks = my_callbacks)
+        self.model.fit(self.Xtrain, self.Ytrain, batch_size = 64, epochs = 300, callbacks = my_callbacks)
     
     def load(self, filename):
         self.model.load_weights(filename)
